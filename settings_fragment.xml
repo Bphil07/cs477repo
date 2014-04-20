@@ -1,3 +1,6 @@
+
+
+
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     
     <PreferenceCategory
@@ -19,6 +22,10 @@
         	android:entryValues="@array/friendList"
         />
         
+        <Preference
+            android:key="deleteContacts"
+            android:summary="Deletes All contatcts!"
+            android:title="Delete Contacts" />
         
     </PreferenceCategory>
         
@@ -32,7 +39,8 @@
             android:title="Text Color"
             android:summary="Change the color of the chat text "
             android:entries= "@array/chatColors"
-            android:entryValues= "@array/chatColors"  />
+            android:entryValues= "@array/chatColors"
+            android:defaultValue= "Black"  />
         
         <ListPreference
             android:key="font_size"
@@ -41,6 +49,16 @@
             android:entries="@array/fontSize"
             android:entryValues="@array/fontSize" />
         
+        
+        <Preference
+            android:key="deleteMessages"
+            android:summary="Deletes all messages"
+            android:title="Delete Messages" />
+        
         </PreferenceCategory>
         
 </PreferenceScreen>
+
+
+
+a
