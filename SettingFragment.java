@@ -4,13 +4,20 @@ package edu.nau.CS477.Fragments;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+
 import com.example.android.navigationdrawerexample.R;
 import android.preference.*;
+import android.preference.Preference.OnPreferenceClickListener;
 
 import edu.nau.CS477.Classes.ChatsDatabaseHandler;
 import edu.nau.CS477.Classes.ContactsDatabaseHandler;
@@ -25,34 +32,21 @@ public class SettingsFragment extends PreferenceFragment {
     private View mDeleteMessagesButton;
     private ContactsDatabaseHandler db;
     private ChatsDatabaseHandler chatDB;
+    Context thiscontext;
     public SettingsFragment() {
         
     }
     
+    @Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.layout.settings_fragment);
-	}
-}
-    /*
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.settings_fragment, container, false);
-        
-        int i = getArguments().getInt(MENU_ITEM_NUMBER);
-        String menuItem = getResources().getStringArray(R.array.main_navigation_menu)[i];
-        getActivity().setTitle(menuItem);
-        return rootView;
-    }
-    
-    @Override
-	public void onActivityCreated(Bundle savedInstanceState){
-    	super.onCreate(savedInstanceState);
-    	mDeleteContactsButton = getActivity().findViewById(R.id.delete_contacts);
-    	mDeleteContactsButton.setOnClickListener(new View.OnClickListener() {
+		// Find and assign clickListener to delete contact preference 'button'
+    	Preference deleteContacts = findPreference("deleteContacts");
+    	deleteContacts.setOnPreferenceClickListener(new OnPreferenceClickListener()
+    	{
             @Override
-			public void onClick(View v) {
+			public boolean onPreferenceClick(Preference preference) {
             	DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             	    @Override
             	    public void onClick(DialogInterface dialog, int which) {
@@ -75,14 +69,16 @@ public class SettingsFragment extends PreferenceFragment {
             	
             	builder.setMessage("Delete All Contacts?").setPositiveButton("Yes", dialogClickListener)
             	    .setNegativeButton("No", dialogClickListener).show();
+				return true;
 		        
             }
         });
-    	
-    	mDeleteMessagesButton = getActivity().findViewById(R.id.delete_messages);
-    	mDeleteMessagesButton.setOnClickListener(new View.OnClickListener() {
+    	//Find and assign clickListener to delete message preference 'button'
+    	Preference deleteMessages = findPreference("deleteMessages");
+    	deleteMessages.setOnPreferenceClickListener(new OnPreferenceClickListener()
+    	{
             @Override
-			public void onClick(View v) {
+			public boolean onPreferenceClick(Preference preference) {
             	DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             	    @Override
             	    public void onClick(DialogInterface dialog, int which) {
@@ -103,14 +99,16 @@ public class SettingsFragment extends PreferenceFragment {
             	
             	builder.setMessage("Delete All Messages?").setPositiveButton("Yes", dialogClickListener)
             	    .setNegativeButton("No", dialogClickListener).show();
+				return true;
 		        
             }
         });
         
 					
     	
-        }
+        
     
-   
 }
-*/
+}
+
+
